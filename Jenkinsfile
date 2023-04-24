@@ -11,6 +11,11 @@ pipeline{
             sh 'chmod a+x mvnw'
             sh './mvnw clean package -DskipTests=true'
            }
+          stage('test'){
+           steps{
+            sh 'mvn test'
+          
+           }
            post{
            always{
            archiveArtifacts 'target/*.jar'
