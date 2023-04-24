@@ -11,19 +11,21 @@ pipeline{
             sh 'chmod a+x mvnw'
             sh './mvnw clean package -DskipTests=true'
            }
-           }
-          stage('test'){
-           steps{
-            sh 'mvn test'
+           
           
-           }
-          }
+           
            post{
            always{
            archiveArtifacts 'target/*.jar'
            }
            }
            }
+            stage('test'){
+           steps{
+            sh 'mvn test'
+          
+           }
+            }
            stage(DockerBuild){
            steps{
            sh 'docker build -t thataanchaljoshi/allergy-repo:allergy-service-image .'
